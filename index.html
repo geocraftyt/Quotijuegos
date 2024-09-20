@@ -3,78 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quoticraft Futurista</title>
+    <title>Quotijuegos</title>
     <style>
         body {
             margin: 0;
             padding: 0;
+            background-image: url('https://source.unsplash.com/random'); /* Puedes cambiarlo por cualquier imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        header {
+            text-align: center;
+            font-size: 3rem;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        nav {
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 10px 0;
+        }
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .container {
+            margin-left: 220px;
+            padding: 50px;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            font-family: 'Orbitron', sans-serif;
-            color: #ffffff;
         }
-        h1 {
-            font-size: 4rem;
-            letter-spacing: 5px;
+        .dropdown {
+            width: 300px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
             text-align: center;
-            animation: glow 1.5s ease-in-out infinite alternate;
         }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 30px #00d4ff, 0 0 40px #00d4ff, 0 0 50px #00d4ff, 0 0 60px #00d4ff, 0 0 70px #00d4ff;
-            }
-            to {
-                text-shadow: 0 0 20px #ffffff, 0 0 30px #ffffff, 0 0 40px #00d4ff, 0 0 50px #00d4ff, 0 0 60px #00d4ff, 0 0 70px #00d4ff, 0 0 80px #00d4ff;
-            }
+        .dropdown select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            outline: none;
         }
-
-        .button {
+        .download-btn {
             display: inline-block;
-            padding: 15px 30px;
-            font-size: 1.5rem;
-            color: #ffffff;
-            background-color: transparent;
-            border: 2px solid #00d4ff;
-            border-radius: 30px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background: rgba(0, 255, 0, 0.6);
+            color: black;
+            margin-top: 10px;
+            border-radius: 5px;
             text-decoration: none;
-            transition: 0.3s ease-in-out;
-            margin-top: 20px;
-            cursor: pointer;
+            transition: background 0.3s;
         }
-
-        .button:hover {
-            background-color: #00d4ff;
-            color: #000000;
-            box-shadow: 0 0 20px #00d4ff, 0 0 30px #00d4ff, 0 0 40px #00d4ff, 0 0 50px #00d4ff;
+        .download-btn:hover {
+            background: rgba(0, 255, 0, 1);
         }
-
-        .container {
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .button {
-                font-size: 1.2rem;
-                padding: 10px 20px;
-            }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 220px;
+            width: calc(100% - 220px);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            display: flex;
+            justify-content: center;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header>
+        Quotijuegos
+    </header>
+
+    <nav>
+        <a href="#">Emuladores</a>
+        <a href="#">Celulares</a>
+        <a href="#">Juegos</a>
+        <a href="#">Series</a>
+        <a href="#">Quoticraft</a>
+        <a href="#">Programas</a>
+        <a href="#">Sistemas</a>
+    </nav>
+
     <div class="container">
-        <h1>Bienvenido a Quoticraft</h1>
-        <a href="#" class="button">Quoticraft</a>
+        <div class="dropdown">
+            <h2>Quoticraft</h2>
+            <label for="version">Versiones</label>
+            <select id="version">
+                <option>Quoticraft BETA</option>
+                <option>Quoticraft 1.0</option>
+                <option>Quoticraft 1.1</option>
+                <option>Quoticraft 1.2</option>
+            </select>
+            <a href="#" class="download-btn">Descargar</a>
+        </div>
     </div>
+
+    <footer>
+        <p>Servidores oficiales: Java (1.8-1.21) - IP: quoticraft.server.cloud | Bedrock (1.7 - 1.21)</p>
+    </footer>
 </body>
 </html>
