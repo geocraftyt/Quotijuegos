@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador 24 horas</title>
+    <title>Contador 24 horas en tiempo real</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,20 +20,24 @@
             cursor: pointer;
             margin: 10px;
         }
+        button:disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
 
     <h1>Contador de 24 horas</h1>
-    <div id="timer">24:00:00</div>
+    <div id="timer">Cargando...</div>
 
     <div>
-        <button id="reducir">Reducir el tiempo</button>
+        <button id="reducir" disabled>Reducir el tiempo</button>
         <span id="votosReducir">Votos para reducir: 0/3</span>
     </div>
 
     <div>
-        <button id="aumentar">Subir el tiempo</button>
+        <button id="aumentar" disabled>Subir el tiempo</button>
         <span id="votosAumentar">Votos para aumentar: 0/3</span>
     </div>
 
@@ -46,6 +50,18 @@
         let votosAumentar = 0;
         const votosMinimos = 3;
 
+        // Verificar si el usuario ya ha votado en el dispositivo
+        const hasVotedReduce = localStorage.getItem('votedReduce');
+        const hasVotedIncrease = localStorage.getItem('votedIncrease');
+
+        // Deshabilitar botones si ya ha votado
+        if (!hasVotedReduce) {
+            document.getElementById('reducir').disabled = false;
+        }
+        if (!hasVotedIncrease) {
+            document.getElementById('aumentar').disabled = false;
+        }
+
         // Función para convertir segundos en formato hh:mm:ss
         function formatTime(seconds) {
             const hours = Math.floor(seconds / 3600);
@@ -55,7 +71,7 @@
             return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
         }
 
-        // Actualizar el contador
+        // Actualizar el contador en tiempo real
         function updateTimer() {
             document.getElementById('timer').textContent = formatTime(totalSeconds);
         }
@@ -67,12 +83,15 @@
         }
 
         // Contador que disminuye cada segundo
-        setInterval(() => {
-            if (totalSeconds > 0) {
-                totalSeconds--;
-                updateTimer();
-            }
-        }, 1000);
+        function startTimer() {
+            updateTimer(); // Actualizar inmediatamente en tiempo real
+            setInterval(() => {
+                if (totalSeconds > 0) {
+                    totalSeconds--;
+                    updateTimer();
+                }
+            }, 1000);
+        }
 
         // Evento para reducir el tiempo
         document.getElementById('reducir').addEventListener('click', () => {
@@ -84,6 +103,8 @@
                 }
                 votosReducir = 0; // Reiniciar los votos
             }
+            localStorage.setItem('votedReduce', 'true'); // Guardar que el usuario ya votó
+            document.getElementById('reducir').disabled = true; // Deshabilitar botón
             updateVotes();
             updateTimer();
         });
@@ -98,13 +119,17 @@
                 }
                 votosAumentar = 0; // Reiniciar los votos
             }
+            localStorage.setItem('votedIncrease', 'true'); // Guardar que el usuario ya votó
+            document.getElementById('aumentar').disabled = true; // Deshabilitar botón
             updateVotes();
             updateTimer();
         });
 
         // Inicializar el contador y los votos
-        updateTimer();
         updateVotes();
+
+        // Iniciar el contador en tiempo real al cargar la página
+        startTimer();
     </script>
 
 </body>
